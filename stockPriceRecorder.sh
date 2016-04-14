@@ -1,16 +1,21 @@
 
 
-# response=$(curl --write-out %{data} --silent --output /dev/null "http://finance.yahoo.com/d/quotes.csv?s=KBC.BR&f=a")
-price=$(curl "http://download.finance.yahoo.com/d/quotes.csv?s=KBC.BR&f=a")
 
-echo $price
+while :
+do
+  price=$(curl "http://download.finance.yahoo.com/d/quotes.csv?s=KBC.BR&f=a")
 
-echo $price >> $RMBASHPATH/src/github.com/romainmenke/stockPriceRecorder/kbc.csv
+  echo $price
 
-cd $RMBASHPATH/src/github.com/romainmenke/stockPriceRecorder
+  echo $price >> $RMBASHPATH/src/github.com/romainmenke/stockPriceRecorder/kbc.csv
 
-git add .
+  cd $RMBASHPATH/src/github.com/romainmenke/stockPriceRecorder
 
-git commit -m "update"
+  git add .
 
-git push
+  git commit -m "update"
+
+  git push
+
+  sleep 30
+done
